@@ -1,0 +1,101 @@
+/* 通用样式 */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffe6f2; /* 柔和粉色背景 */
+    color: #333; /* 深灰色字体 */
+    line-height: 1.6;
+}
+
+/* 导航栏样式 */
+nav {
+    background-color: #ff99cc; /* 深粉色导航背景 */
+    padding: 10px 60px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #ff66b2; /* 浅粉色 */
+}
+
+/* 主要内容样式 */
+main {
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #cc0052; /* 深粉红色标题 */
+    margin-bottom: 20px;
+}
+
+a {
+    color: #ff66b2;
+    text-decoration: none;
+    font-size: 1.1em;
+    margin: 5px;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #cc0052;
+}
+
+/* iframe 容器样式 */
+div {
+    margin-bottom: 20px;
+}
+
+iframe {
+    border: 2px solid #ff99cc; /* 粉色边框 */
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+p {
+    margin-top: 10px;
+    color: #cc0052;
+    font-weight: bold;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    iframe {
+        width: 90%;
+        height: auto;
+    }
+
+    main {
+        padding: 10px;
+    }
+}
+
+
+  

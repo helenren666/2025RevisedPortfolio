@@ -1,0 +1,112 @@
+/* 通用样式 */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* 一致字体 */
+    margin: 0;
+    padding: 0;
+    background-color: #ffe6f2; /* 柔和粉色背景 */
+    color: #333;
+    line-height: 1.8;
+}
+
+p{
+    padding: 10px;
+    background-color: #ff99cc; /* 深粉色导航背景 */
+    text-align: center;
+    font-size: 1.0em;
+    color: #fff; 
+    margin-bottom: 20px;
+    text-align:center;
+    border: 2px solid #ff99cc;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+p:hover {
+    color: #fff;
+    background: #ff66b2; /* 鼠标悬停变色 */
+    border-color: #cc0052;
+    transform: scale(1.05);
+}
+
+
+/* 导航栏样式 */
+nav {
+    background-color: #ff99cc; /* 深粉色导航背景 */
+    padding: 10px 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: rgb(211, 74, 74);
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #ff66b2; /* 浅粉色 */
+}
+
+/* 标题样式 */
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #cc0052; 
+    margin-bottom: 20px;
+    position: relative;
+}  
+
+
+h1::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, #ff66b2, #ff99cc);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* 链接样式 */
+a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #ff66b2; /* 浅粉色链接 */
+    margin: 15px auto;
+    padding: 10px 20px;
+    border: 2px solid #ff99cc;
+    border-radius: 8px;
+    background: #fff;
+    max-width: 300px;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #fff;
+    background: #ff66b2; /* 鼠标悬停变色 */
+    border-color: #cc0052;
+    transform: scale(1.05);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+    a {
+        font-size: 1em;
+        padding: 8px 16px;
+        max-width: 100%;
+    }
+}
+
+/* 让 sketch-container1 居中 */
+#sketch-container1 {
+    display: flex; /* 启用 Flex 布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    width: 100%; /* 占满宽度 */
+}

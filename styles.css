@@ -1,0 +1,107 @@
+body {
+     background-color: #7a0000; /* 深红背景 */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+    
+}
+
+.scroll-container {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 40px; /* 增加间距 */
+    align-items: center;
+}
+
+/* 独立的卷轴容器 */
+.scroll-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* 书卷主体 */
+.scroll {
+    width: 300px;
+    height: 100px;
+    overflow: hidden;
+    background-image: url('red_silk_texture.jpg'); /* 红色丝绸背景 */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    transition: height 0.6s ease-in-out;
+    cursor: pointer;
+    position: relative;
+}
+
+/* 书卷展开时 */
+.scroll.expanded {
+    height: 600px;
+}
+/* 书卷顶部 */
+.scroll-top {
+    width: 320px;
+    height: 30px;
+    background-image: url('scroll_top.png');
+    background-size: cover;
+    
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: -15px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* 让它水平居中 */
+    z-index: 2; /* 让它覆盖 .scroll-content */
+}
+
+/* 书卷底部 */
+.scroll-bottom {
+    width: 320px;
+    height: 30px;
+    background-image: url('scroll_bottom.png');
+    /* background-color: aqua; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: -15px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%); /* 让它水平居中 */
+    z-index: 2; /* 让它盖住 .scroll-content */
+}
+.scroll-content {
+    padding: 1px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgb(197, 114, 76);
+    text-shadow: 2px 2px 5px rgba(200, 25, 25, 0.6);
+    background-color: rgb(244, 206, 189);
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* 让文本从上到下排列 */
+    align-items: center; /* 让内容在容器内水平居中 */
+    justify-content: center; /* 让内容在容器内垂直居中 */
+    text-align: center; /* 让文本内部居中 */
+    position: relative;
+    z-index: 1;
+}
+
+
+a {
+    color: #ff66b2;
+    text-decoration: none;
+    font-size: 18px; /* 调整字体大小，让它与正文更协调 */
+    margin: 2px; /* 减小间距 */
+    display: inline; /* 让链接像普通文本一样排列 */
+    transition: color 0.3s ease;
+}
+a:hover {
+    font-size: 22px; /* 悬停时字体变大 */
+    color: #ff3385;
+}

@@ -1,0 +1,29 @@
+/* 冰雪奇缘主题 CSS */
+body {
+    background: url('olaf.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+audio {
+    background: rgba(114, 216, 225, 0.5);
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 0 0 10px rgba(50, 115, 137, 0.8);
+}
+/* 导航栏样式 */
+nav {
+    background-color: #99d6ff; /* 深粉色导航背景 */
+    padding: 10px 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #85d0cf; /* 浅粉色 */
+}

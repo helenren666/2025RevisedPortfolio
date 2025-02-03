@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "images"
+		},
+		{
+			"path": "assets"
+		},
+		{
+			"path": "balanceGameAssets"
+		},
+		{
+			"path": "eatGame"
+		},
+		{
+			"path": "game3"
+		},
+		{
+			"path": "scenepage"
+		}
+	]
+}
