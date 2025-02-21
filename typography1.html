@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Typography1</title>
+  <!-- p5.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js"></script>
+
+  <!-- 使用本地字体 font.otf -->
+  <style>
+    /* 引入自定义字体（请确保路径和文件名匹配） */
+    @font-face {
+      font-family: 'MyCustomFont';
+      src: url('font4.ttf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'MyCustomFont2';
+      src: url('font4.ttf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    /* 全局样式：蓝色主题 */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #E3F2FD; /* 浅蓝背景 */
+      color: #333;
+      font-family: 'MyCustomFont', sans-serif; /* 使用自定义字体 */
+    }
+
+    /* 顶部标题区域 */
+    header {
+      background: #2196F3; /* 较深蓝 */
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: normal; /* 根据需要，可设置normal或bold */
+      color: #fff;         /* 白字，突出蓝色背景 */
+    }
+
+    /* 主容器：居中布局 */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* 按钮 + 颜色选择器的控制区 */
+    .controls {
+      margin-bottom: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px; /* 控制元素之间的间距 */
+    }
+
+    /* 按钮样式：蓝色系 */
+    .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #64B5F6; /* 浅蓝 */
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      font-family: 'MyCustomFont2', sans-serif;
+    }
+    .btn:hover {
+      background-color: #42A5F5; /* 悬停时更深的蓝 */
+    }
+
+    /* 颜色选择器：设置大小、去边框 */
+    #colorPicker {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: none;
+      cursor: pointer;
+    }
+    label {
+      font-weight: normal;
+      margin-left: 8px;
+      color: #333;
+    }
+
+    /* 用于在中间放置 canvas 的容器 */
+    .canvas-area {
+      text-align: center; /* 保证画布居中 */
+    }
+
+    /* 底部提示文字 */
+    .hint {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 顶部标题 -->
+  <header>
+    <h1>Typography Effect</h1>
+    <nav>
+      <a href="index.html">Back</a>
+  </nav>
+  </header>
+
+  <!-- 主内容容器 -->
+  <div class="container">
+    <!-- 按钮和颜色选择器区域 -->
+    <div class="controls">
+      <button class="btn" id="btn1">Stock</button>
+      <button class="btn" id="btn2">Helen</button>
+      <button class="btn" id="btn3">Apple</button>
+
+      <label for="colorPicker">Choose color for effect 2</label>
+      <input type="color" id="colorPicker" value="#2F83F0">
+    </div>
+
+    <!-- 用于放置画布的容器 -->
+    <div class="canvas-area" id="canvasContainer">
+      <!-- p5.js 画布会通过 createCanvas(...).parent("canvasContainer") 插入这里 -->
+    </div>
+
+    <!-- 提示文字 -->
+    <p class="hint">
+      Use color picker to change color for all typography
+    </p>
+  </div>
+
+  <!-- 引入你的 p5 代码文件 -->
+  <script src="sketch.js"></script>
+</body>
+</html>
