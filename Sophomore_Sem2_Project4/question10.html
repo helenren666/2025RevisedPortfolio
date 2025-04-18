@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Question 10 - Guess The Track</title><!-- !!!!!!!!!!!!!!!! -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://use.typekit.net/htw6kjt.css">
+  <link rel="stylesheet" href="https://unpkg.com/open-props@1.6.17/easings.min.css">
+  <link rel="stylesheet" href="question2.css">
+</head>
+<body>
+  <div id="score-display">Score: <span id="score-value">0</span></div>
+
+  <main>
+    <section>
+      <h1>🎵 Question 10</h1><!-- !!!!!!!!!!!!!!!! -->
+
+      <video id="lyric-video" width="480" controls>
+        <source src="assets/video10.mp4" type="video/mp4">  <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+        Your browser does not support the video tag.
+      </video>
+      <div id="options">
+        <button class="option" data-answer="4x4">
+          <span class="song-name">4x4</span><br>
+          <span class="artist-name">Travis Scott</span>
+        </button>
+        <button class="option" data-answer="Type Shit">
+          <span class="song-name">Type Shit</span><br>
+          <span class="artist-name">Metro Boomin/Travis Scott/Future</span>
+        </button>
+        <button class="option" data-answer="We Still Don’t Trust You">
+          <span class="song-name">We Still Don’t Trust You</span><br>
+          <span class="artist-name">Future/Metro Boomin/The Weeknd</span>
+        </button>
+        <button class="option" data-answer="We Don’t Trust You">
+          <span class="song-name">We Don’t Trust You</span><br>
+          <span class="artist-name">Future/Metro Boomin</span>
+        </button>
+      </div>
+      
+      
+      
+      
+      
+
+      <p id="feedback"></p>
+      <button anim="glitch" id="nextBtn" style="display:none">Next Question</button>
+    </section>
+  </main>
+
+  <script src="question10.js"></script> <!-- !!!!!!!!!!!!!!!! -->
+</body>
+</html>

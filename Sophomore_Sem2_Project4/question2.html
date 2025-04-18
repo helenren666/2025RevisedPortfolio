@@ -1,0 +1,92 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Question 2 - Guess The Track</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://use.typekit.net/htw6kjt.css">
+  <link rel="stylesheet" href="https://unpkg.com/open-props@1.6.17/easings.min.css">
+  <link rel="stylesheet" href="question2.css">
+</head>
+<body>
+  <div id="score-display">Score: <span id="score-value">0</span></div>
+
+  <main>
+    <section>
+      <h1>🎵 Question 2</h1>
+
+      <video id="lyric-video" width="480" controls>
+        <source src="assets/video2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <div id="options">
+        <button class="option">Sicko Mode<br>Travis Scott</button>
+        <button class="option">TV off <br>Kendrick Lamar</button>
+        <button class="option">Money Trees<br>Kendrick Lamar</button>
+        <button class="option">Like That<br>Future</button>
+      </div>
+
+      <p id="feedback"></p>
+      <button anim="glitch" id="nextBtn" style="display:none">Next Question</button>
+    </section>
+  </main>
+
+  <script src="question2.js"></script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Question 2 - Guess The Track</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://use.typekit.net/htw6kjt.css">
+  <link rel="stylesheet" href="https://unpkg.com/open-props@1.6.17/easings.min.css">
+  <link rel="stylesheet" href="question2.css">
+</head>
+<body>
+  <div id="score-display">Score: <span id="score-value">0</span></div>
+
+  <main>
+    <section>
+      <h1>🎵 Question 2</h1>
+
+      <video id="lyric-video" width="480" controls>
+        <source src="assets/video2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      
+
+      <div id="options">
+        <button class="option" data-answer="Sicko Mode">
+          <span class="song-name">Sicko Mode</span><br>
+          <span class="artist-name">Travis Scott</span>
+        </button>
+        <button class="option" data-answer="tv off">
+          <span class="song-name">TV off</span><br>
+          <span class="artist-name">Kendrick Lamar</span>
+        </button>
+        <button class="option" data-answer="Money Trees">
+          <span class="song-name">Money Trees</span><br>
+          <span class="artist-name">Kendrick Lamar</span>
+        </button>
+        <button class="option" data-answer="Like That">
+          <span class="song-name">Like That</span><br>
+          <span class="artist-name">Future/Kendrick Lamar/Metro Bloomin</span>
+        </button>
+      </div>
+
+      <p id="feedback"></p>
+      <button anim="glitch" id="nextBtn" style="display:none">Next Question</button>
+    </section>
+  </main>
+
+  <script src="question2.js"></script>
+</body>
+</html>

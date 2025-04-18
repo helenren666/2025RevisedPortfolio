@@ -1,0 +1,151 @@
+
+
+@import "https://unpkg.com/open-props@1.6.17/easings.min.css";
+
+@keyframes glitch {
+    50% {
+      transform: skew(180deg);
+    }
+  }
+  
+  [anim="glitch"]:not(.toggled) {
+    animation: glitch var(--ease-elastic-in-1) 6ms infinite;
+  }
+  
+
+:root {
+  --black: hsl(0, 0%, 13%);
+  --gray: hsl(0, 0%, 70%);
+  --white: hsl(0, 0%, 96%);
+  --red: hsl(12, 79%, 40%);
+  --red-shadow: hsl(12, 100%, 60%);
+  --green: hsl(141, 53%, 50%);
+  --dark: hsl(12, 32%, 2%);
+}
+
+body {
+  background-color: #000;
+  color: var(--white);
+  font-family: "aglet-mono-variable", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  position: relative;
+}
+
+#score-display {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background-color: var(--black);
+  border: 1px solid var(--red);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 0 6px var(--red-shadow);
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+h1 {
+  font-size: 3rem;
+  color: var(--red);
+  font-family: "DripTitle", sans-serif;
+}
+
+video {
+  border: 2px solid var(--gray);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+#options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+button {
+  all: unset;
+  background-color: var(--black);
+  color: var(--white);
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  border: 1px solid var(--red);
+  box-shadow: 0 0 4px var(--red-shadow);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  perspective: 1000px;
+  position: relative;
+  overflow: hidden;
+}
+
+button.option:hover {
+  background-color: #111;
+}
+
+.correct {
+  border: 2px solid var(--green);
+}
+
+.wrong {
+  border: 2px solid crimson;
+}
+
+#feedback {
+  margin-top: 10px;
+  font-size: 1.1rem;
+}
+
+#nextBtn {
+  margin-top: 20px;
+}
+
+
+.encouragement {
+  margin-top: 10px;
+  font-size: 1.1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.song-name {
+    /* font-family: "DripTitle", sans-serif; */
+    
+    font-size: 1.2rem;
+    display: block;
+  }
+  
+  .artist-name {
+    font-family: "aglet-mono-variable", sans-serif;
+    font-size: 0.6rem;
+    color: var(--gray);
+    letter-spacing: 0.03em;
+    display: block;
+    
+  }

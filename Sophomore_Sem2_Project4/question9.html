@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Question 9 - Guess The Track</title><!-- !!!!!!!!!!!!!!!! -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://use.typekit.net/htw6kjt.css">
+  <link rel="stylesheet" href="https://unpkg.com/open-props@1.6.17/easings.min.css">
+  <link rel="stylesheet" href="question2.css">
+</head>
+<body>
+  <div id="score-display">Score: <span id="score-value">0</span></div>
+
+  <main>
+    <section>
+      <h1>🎵 Question 9</h1><!-- !!!!!!!!!!!!!!!! -->
+
+      <video id="lyric-video" width="480" controls>
+        <source src="assets/video9.mp4" type="video/mp4">  <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+        Your browser does not support the video tag.
+      </video>
+      <div id="options">
+        <button class="option" data-answer="DENIAL IS A RIVER">
+          <span class="song-name">DENIAL IS A RIVER</span><br>
+          <span class="artist-name">Rico Nasty</span>
+        </button>
+        <button class="option" data-answer="WAP">
+          <span class="song-name">WAP</span><br>
+          <span class="artist-name">Cardi B/Megan Thee Stallion</span>
+        </button>
+        <button class="option" data-answer="NISSAN ALTIMA">
+          <span class="song-name">NISSAN ALTIMA</span><br>
+          <span class="artist-name">Rico Nasty</span>
+        </button>
+        <button class="option" data-answer="Plain Jane">
+            <span class="song-name">Plain Jane</span><br>
+            <span class="artist-name">Nicky Minaj/A$AP Ferg</span>
+          </button>
+      </div>
+      
+      
+      
+      
+
+      <p id="feedback"></p>
+      <button anim="glitch" id="nextBtn" style="display:none">Next Question</button>
+    </section>
+  </main>
+
+  <script src="question9.js"></script> <!-- !!!!!!!!!!!!!!!! -->
+</body>
+</html>

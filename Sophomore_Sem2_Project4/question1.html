@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Question 1 - Guess The Track</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://use.typekit.net/htw6kjt.css">
+  <link rel="stylesheet" href="https://unpkg.com/open-props@1.6.17/easings.min.css">
+  <link rel="stylesheet" href="question2.css">
+</head>
+<body>
+    <div id="score-display">Score: <span id="score-value">0</span></div>
+  <main>
+    <section>
+      <h1>🎵 Question 1</h1>
+      <video id="lyric-video" width="480" controls>
+        <source src="assets/video1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+
+
+      <div id="options">
+        <button class="option">Sicko Mode</button>
+        <button class="option">In My Feelings</button>
+        <button class="option">God's Plan</button>
+        <button class="option">One Dance</button>
+      </div>
+
+      <p id="feedback"></p>
+      <!-- <button id="nextBtn" style="display:none">Next Question</button> -->
+      <button anim="glitch" id="nextBtn" style="display:none">Next Question</button>
+
+
+
+    </section>
+  </main>
+
+  <script src="question1.js"></script>
+</body>
+</html>

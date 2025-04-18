@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Question 3 - Guess The Track</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://use.typekit.net/htw6kjt.css">
+  <link rel="stylesheet" href="https://unpkg.com/open-props@1.6.17/easings.min.css">
+  <link rel="stylesheet" href="question2.css">
+</head>
+<body>
+  <div id="score-display">Score: <span id="score-value">0</span></div>
+
+  <main>
+    <section>
+      <h1>🎵 Question 3</h1>
+
+      <video id="lyric-video" width="480" controls>
+        <source src="assets/video3.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <div id="options">
+        <button class="option" data-answer="fukumean">
+          <span class="song-name">fukumean</span><br>
+          <span class="artist-name">Gunna</span>
+        </button>
+        <button class="option" data-answer="Praise The Lord">
+          <span class="song-name">Praise The Lord</span><br>
+          <span class="artist-name">A$AP Rocky/Skepta</span>
+        </button>
+        <button class="option" data-answer="P Power">
+          <span class="song-name">P Power</span><br>
+          <span class="artist-name">Gunna</span>
+        </button>
+        <button class="option" data-answer="Private Landing Don Toliver">
+          <span class="song-name">Private Landing</span><br>
+          <span class="artist-name">Don Toliver</span>
+        </button>
+      </div>
+
+      <p id="feedback"></p>
+      <button anim="glitch" id="nextBtn" style="display:none">Next Question</button>
+    </section>
+  </main>
+
+  <script src="question3.js"></script>
+</body>
+</html>

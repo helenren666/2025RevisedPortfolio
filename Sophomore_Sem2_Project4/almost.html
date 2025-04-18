@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Almost There!</title>
+  <base href="/Sophomore_Sem2_Project4/">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://use.typekit.net/htw6kjt.css">
+  <link rel="stylesheet" href="https://unpkg.com/open-props@1.6.17/easings.min.css">
+  <link rel="stylesheet" href="question2.css"> <!-- 用你原来的CSS -->
+</head>
+<body>
+  <main>
+    <h1> Just Do It</h1>
+    <br><br> <br>
+    <!-- <img src="assets/halfway.gif" alt="Celebration" class="gif" /> -->
+    <img id="Weeknd2-gif" src="assets/Weeknd2.gif" height="400">
+    <br><br><br>
+    <p class="encouragement">You Are Almost There 💪</p>
+    <br>
+    <button id="nextBtn">Continue</button>
+
+    <!-- <p id="feedback"></p> -->
+      <button anim="glitch" id="nextBtn" style="display:none">Next</button>
+  </main>
+
+  <script>
+    // 加载自定义字体
+const customFont = new FontFace('DripTitle', 'url(assets/coolfont.otf)');
+customFont.load().then(font => {
+  document.fonts.add(font);
+  document.querySelector('h1').style.fontFamily = 'DripTitle, sans-serif';
+});
+
+
+const nextBtn = document.getElementById('nextBtn');
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      window.location.href = "question9.html";
+    });
+  </script>
+</body>
+</html>

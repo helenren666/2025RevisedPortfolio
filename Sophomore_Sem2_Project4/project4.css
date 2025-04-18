@@ -1,0 +1,73 @@
+
+
+@keyframes glitch {
+  50% {
+    transform: skew(180deg);
+  }
+}
+
+[anim="glitch"]:not(.toggled) {
+  animation: glitch var(--ease-elastic-in-1) 6ms infinite;
+}
+
+:root {
+  --black: hsl(0, 0%, 13%);
+  --dark: hsl(12, 32%, 2%);
+  --gray: hsl(0, 0%, 70%);
+  --white: hsl(0, 0%, 96%);
+  --red: hsl(12, 79%, 40%);
+  --red-shadow: hsl(12, 100%, 60%);
+}
+
+body {
+  background-color: #000;
+  color: var(--white);
+  font-family: "aglet-mono-variable", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+h1 {
+  font-size: 7rem;
+  color: var(--red);
+  margin-bottom: 10px;
+  font-family: "DripTitle", sans-serif;
+
+}
+
+p {
+  font-size: 1.1rem;
+  color: var(--gray);
+  margin-bottom: 20px;
+}
+
+button {
+  all: unset;
+  background-color: var(--black);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--red);
+  box-shadow: 0 0 4px var(--red-shadow);
+  cursor: pointer;
+  perspective: 1000px;
+  position: relative;
+  overflow: hidden;
+
+  
+}
