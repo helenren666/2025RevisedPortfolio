@@ -1,0 +1,10 @@
+body {
+    background-color: #2b8046;
+    color: var(--white);
+    font-family: "aglet-mono-variable", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+  }
