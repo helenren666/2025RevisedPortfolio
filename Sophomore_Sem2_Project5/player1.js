@@ -7,3 +7,5 @@ document.getElementById("searchBtn").addEventListener("click", () => {
     }
   });
   
+  //这种地方请注意！！！！！！！！！！！！！player2.html
+  //不要在前面加上/sophomore project5/player2.html?artist=${encodeURIComponent(artist) 

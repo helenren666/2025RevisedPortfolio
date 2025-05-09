@@ -56,8 +56,8 @@
             </div>
             <div class="scroll-bottom"></div>
         </div>
-
-        <div class="scroll-wrapper">
+        <!-- 这种也是div class container，注意是否有匹配的css里面写 -->
+        <div class="scroll-wrapper"> 
             <div class="scroll-top"></div>
             <div class="scroll" onclick="toggleScroll(this)">
                 <div class="scroll-content">
@@ -66,7 +66,17 @@
                     <a href="typography2.html" target="_blank">🐍Typography Version2🐍</a>
                     <a href="ExperimentalCamera/ExperimentalCamera.html" target="_blank">📷Experimental Cam📷</a>
                     <a href="Sophomore_Sem2_Project4/project4.html" target="_blank">🎧Rap Quiz🎧</a>
-                    <a href="Sophomore_Sem2_Project5/player1.html" target="_blank">💽Album Search Tool💽</a>
+                    <a href="Sophomore_Sem2_Project5/player1.html" target="_blank">💽Album Search💽</a>
+
+                    <!-- 
+                    卧槽 我他妈要从这个最后final吸取教训。
+                    1. 就是说css和js 前面 如果和html在同一个层级，就不要加Sophomore_Sem2_Project5/这个前缀。 包括字体和图片source。
+                    假如说把folder和html放在同一层级， 里面加字体source的话， 再添加/assetfolder/font.otf这样的东西。 看起来这里href想要找到player1.html需要提前加层级， 由于index.html &Sophomore_Sem2_Project5
+                    在同一个层级。 否则也不用加。   
+                    2.html里面refer的css class=（whatever）   component必须要有 如果是class！！ 具体案例看 player1.html， project5style.css 
+                    3.注意可能使用路径网址的地方 案例看player1.js   
+                    总结：给一个project建立好folder以后别他妈瞎搞前缀了就。 不需要任何前缀了
+                    -->
 
 
                 </div>
