@@ -102,12 +102,12 @@ h1 {
 
 @font-face {
   font-family: 'MyFont';
-  src: url('myfont.otf') format('truetype');
+  src: url('/Sophomore_Sem2_Project5/myfont.otf') format('truetype');
 }
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: url('angel.jpg') no-repeat center center / cover;
+  background: url('/Sophomore_Sem2_Project5/angel.jpg') no-repeat center center / cover;
   background-attachment: fixed;
   position: relative;
   color: #fff;

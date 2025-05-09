@@ -29,7 +29,7 @@ fetch(apiURL)
 
       wrapper.addEventListener("click", () => {
         // window.location.href = `player3.html?album=${album.idAlbum}`;
-        window.open(`player3.html?album=${album.idAlbum}`, '_blank');
+        window.open(`/Sophomore_Sem2_Project5/player3.html?album=${album.idAlbum}`, '_blank');
 
       });
 
