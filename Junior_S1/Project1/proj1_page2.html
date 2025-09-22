@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Fries Box Grid with Text</title>
+  <title>Fries Box Grid - Page 2</title>
   <style>
     body {
       margin: 0;
@@ -10,9 +10,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      /* background: #f3dec9; */
-        background: url("project1images/page1images/background.jpg") no-repeat center center;
-  background-size: flex;
+      background: url("project1images/page1images/background.jpg") no-repeat center center;
+      background-size: cover;
+      position: relative; /* 让按钮能绝对定位 */
     }
 
     /* 整体旋转 -90 度 */
@@ -84,45 +84,73 @@
       width: 420px;
       height: 320px;
       background: #d32f2f;
-      /* border-top-left-radius: 50px;
-      border-top-right-radius: 50px; */
       margin-top: -30px; /* 盖住薯条底部 */
       position: relative;
-      display: flex;               /* 开启 flex 布局 */
-  justify-content: right;     /* 水平居中 */
-  align-items: center;         /* 垂直居中 */
+      display: flex;               
+      justify-content: right;     
+      align-items: center;         
     }
 
-    /* 盒子里的文字（可选保留） */
-    
-.fries-text img {
-  max-width: 85%;   /* 图片不会超过盒子宽度的 80% */
-  max-height: 40%;  /* 图片不会超过盒子高度的 80% */
-  object-fit: contain; /* 保持图片比例并居中显示 */
-  
-}
+    .fries-text img {
+      max-width: 85%;
+      max-height: 40%;
+      object-fit: contain;
+    }
+
+    /* 页面按钮 */
+    .page-buttons {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      display: flex;
+      gap: 10px;
+      z-index: 20;
+    }
+
+    .page-buttons a {
+      padding: 8px 14px;
+      background: #fff;
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .page-buttons a:hover {
+      background: #ff4d6d;
+      color: #fff;
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body>
   <div class="fries-box">
-<div class="fries">
-  <div class="fry"><span>healthy</span></div>
-  <div class="fry"><span>living</span></div>
-  <div class="fry"><span>like</span></div>
-  <div class="fry"><span>look</span></div>
-  <div class="fry"><span>to</span></div>
-  <div class="fry"><span>health</span></div>
-  <div class="fry"><span>your</span></div>
-  <div class="fry"><span>sacrifice</span></div>
-  <div class="fry"><span>shouldn't</span></div>
-  <div class="fry"><span>You</span></div>
-</div>
+    <div class="fries">
+      <div class="fry"><span>healthy</span></div>
+      <div class="fry"><span>living</span></div>
+      <div class="fry"><span>like</span></div>
+      <div class="fry"><span>look</span></div>
+      <div class="fry"><span>to</span></div>
+      <div class="fry"><span>health</span></div>
+      <div class="fry"><span>your</span></div>
+      <div class="fry"><span>sacrifice</span></div>
+      <div class="fry"><span>shouldn't</span></div>
+      <div class="fry"><span>You</span></div>
+    </div>
 
     <div class="box">
       <div class="fries-text">
         <img src="project1images/page1images/logo.png" alt="logo">
       </div>
     </div>
+  </div>
+
+  <!-- 页面跳转按钮 -->
+  <div class="page-buttons">
+    <a href="proj1_page1.html">1</a>
+    <a href="proj1_page2.html">2</a>
+    <a href="proj1_page3.html">3</a>
   </div>
 </body>
 </html>

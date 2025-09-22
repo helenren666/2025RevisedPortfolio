@@ -54,6 +54,31 @@
       bottom: 15%;
       right: 20%;
     }
+    /* 页面按钮 */
+    .page-buttons {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      display: flex;
+      gap: 10px;
+      z-index: 20;
+    }
+
+    .page-buttons a {
+      padding: 8px 14px;
+      background: #fff;
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .page-buttons a:hover {
+      background: #ff4d6d;
+      color: #fff;
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body>
@@ -68,6 +93,13 @@
     <!-- Overlay -->
     <img src="project1images/page3images/6.png" class="overlay ozempic-overlay" alt="Ozempic Overlay">
     <img src="project1images/page3images/7.png" class="overlay vinegar-overlay" alt="Apple Cider Vinegar Overlay">
+
+    <!-- 页面跳转按钮 -->
+    <div class="page-buttons">
+      <a href="proj1_page1.html">1</a>
+      <a href="proj1_page2.html">2</a>
+      <a href="proj1_page3.html">3</a>
+    </div>
   </div>
 </body>
 </html>
