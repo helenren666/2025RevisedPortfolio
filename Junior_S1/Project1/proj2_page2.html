@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fries Box Grid with Text</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* background: #f3dec9; */
+        background: url("project1images/page1images/background.jpg") no-repeat center center;
+  background-size: flex;
+    }
+
+    /* 整体旋转 -90 度 */
+    .fries-box {
+      transform: rotate(-90deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 薯条 grid */
+    .fries {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr); /* 10 根薯条 */
+      gap: 6px;
+      width: 400px;
+      height: 250px;
+      align-items: end;
+    }
+
+    .fry {
+      background: #ffdf2d;
+      border-radius: 8px;
+      transition: all 0.4s ease;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* 高矮不一的薯条 */
+    .fry:nth-child(1) { height: 65%; }
+    .fry:nth-child(2) { height: 80%; }
+    .fry:nth-child(3) { height: 90%; }
+    .fry:nth-child(4) { height: 70%; }
+    .fry:nth-child(5) { height: 95%; }
+    .fry:nth-child(6) { height: 75%; }
+    .fry:nth-child(7) { height: 85%; }
+    .fry:nth-child(8) { height: 60%; }
+    .fry:nth-child(9) { height: 88%; }
+    .fry:nth-child(10){ height: 72%; }
+
+    /* 薯条 hover 动画 */
+    .fry:hover {
+      height: 100%;
+      background: #f7ba4a;
+    }
+
+    /* 薯条上的文字 */
+    .fry span {
+      opacity: 0;
+      color: black;
+      font-size: 14px;
+      font-weight: bold;
+      font-family: "Helvetica Neue", sans-serif;
+      text-align: center;
+      transition: opacity 0.4s ease;
+      transform: rotate(90deg); /* 修正整体旋转，让文字正向阅读 */
+      white-space: nowrap;
+    }
+
+    .fry:hover span {
+      opacity: 1;
+    }
+
+    /* 薯条盒子 */
+    .box {
+      width: 420px;
+      height: 320px;
+      background: #d32f2f;
+      /* border-top-left-radius: 50px;
+      border-top-right-radius: 50px; */
+      margin-top: -30px; /* 盖住薯条底部 */
+      position: relative;
+      display: flex;               /* 开启 flex 布局 */
+  justify-content: right;     /* 水平居中 */
+  align-items: center;         /* 垂直居中 */
+    }
+
+    /* 盒子里的文字（可选保留） */
+    
+.fries-text img {
+  max-width: 85%;   /* 图片不会超过盒子宽度的 80% */
+  max-height: 40%;  /* 图片不会超过盒子高度的 80% */
+  object-fit: contain; /* 保持图片比例并居中显示 */
+  
+}
+  </style>
+</head>
+<body>
+  <div class="fries-box">
+<div class="fries">
+  <div class="fry"><span>healthy</span></div>
+  <div class="fry"><span>living</span></div>
+  <div class="fry"><span>like</span></div>
+  <div class="fry"><span>look</span></div>
+  <div class="fry"><span>to</span></div>
+  <div class="fry"><span>health</span></div>
+  <div class="fry"><span>your</span></div>
+  <div class="fry"><span>sacrifice</span></div>
+  <div class="fry"><span>shouldn't</span></div>
+  <div class="fry"><span>You</span></div>
+</div>
+
+    <div class="box">
+      <div class="fries-text">
+        <img src="project1images/page1images/logo.png" alt="logo">
+      </div>
+    </div>
+  </div>
+</body>
+</html>
