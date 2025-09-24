@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>经纬度节点网络</title>
+  <style>
+    body { margin:0; background:black; color:white; overflow:hidden; }
+    canvas { display:block; }
+    button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 8px 12px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="goToMap()">去地图</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script>
+    // 经纬度数据
+    const locations = [
+      [37.5211456, -122.3140069],
+      [37.5341627, -122.3350642],
+      [37.6153981, -122.3898792],
+      [40.6468596, -73.7799381],
+      [40.7357576, -73.9935817],
+      [40.6793263, -73.8040060],
+      [40.7356637, -73.9935472],
+      [37.5615218, -122.274656],
+      [37.7279010, -122.453049],
+      [37.4536517, -122.1776164]
+    ];
+
+    let nodes = [];
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      textSize(12);
+      fill(255);
+      locations.forEach(([lat, lng]) => {
+        nodes.push({
+          x: random(width),
+          y: random(height),
+          dx: random(-1, 1),
+          dy: random(-1, 1),
+          lat, lng
+        });
+      });
+    }
+
+    function draw() {
+      background(0);
+      stroke(255, 100);
+      // draw connections
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          line(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+        }
+      }
+      // draw nodes
+      noStroke();
+      fill(255, 0, 0);
+      nodes.forEach(n => {
+        circle(n.x, n.y, 8);
+        fill(255);
+        text(`${n.lat.toFixed(2)},${n.lng.toFixed(2)}`, n.x + 10, n.y);
+        n.x += n.dx;
+        n.y += n.dy;
+        if (n.x < 0 || n.x > width) n.dx *= -1;
+        if (n.y < 0 || n.y > height) n.dy *= -1;
+      });
+    }
+
+    function mousePressed() {
+      // 点击点，跳到 map.html
+      for (let n of nodes) {
+        if (dist(mouseX, mouseY, n.x, n.y) < 10) {
+          window.location.href = `map.html?lat=${n.lat}&lng=${n.lng}`;
+        }
+      }
+    }
+
+    function goToMap() {
+      // 默认跳到第一个点
+      const n = nodes[0];
+      window.location.href = `map.html?lat=${n.lat}&lng=${n.lng}`;
+    }
+  </script>
+</body>
+</html>

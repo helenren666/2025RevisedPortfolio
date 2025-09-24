@@ -62,6 +62,25 @@
       }).addTo(map)
         .bindPopup(`地点 ${index + 1}`);
     });
+    
+    // 获取 URL 参数
+const urlParams = new URLSearchParams(window.location.search);
+const lat = parseFloat(urlParams.get("lat"));
+const lng = parseFloat(urlParams.get("lng"));
+
+if (!isNaN(lat) && !isNaN(lng)) {
+  // 把地图中心移动到点击的点
+  map.setView([lat, lng], 13);
+
+  // 给这个点画一个高亮的黄色圆圈
+  L.circleMarker([lat, lng], {
+    color: 'yellow',
+    radius: 10,
+    fillColor: 'yellow',
+    fillOpacity: 0.9
+  }).addTo(map).bindPopup("你点击的点").openPopup();
+}
+
   </script>
 </body>
 </html>
