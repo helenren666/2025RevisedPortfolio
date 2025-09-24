@@ -1,0 +1,418 @@
+{"trips": [
+  {
+    "id": "3A3824227C181117",
+    "place_visit": [
+      {"id": ""},
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 37.5211456,
+            "longitude": -122.3140069
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "DRIVE"},
+      "origin": {"visit_id": ""},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "41460A1B610CA131",
+    "place_visit": [
+      {"id": ""},
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 37.534162699999996,
+            "longitude": -122.33506419999999
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "DRIVE"},
+      "origin": {"visit_id": ""},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "481A4F7FF05C08CC",
+    "place_visit": [
+      {"id": ""},
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 37.6153981,
+            "longitude": -122.3898792
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "DRIVE"},
+      "origin": {"visit_id": ""},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "48788ACFDF3A32D8",
+    "place_visit": [
+      {
+        "id": "SOURCE_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.6468596,
+            "longitude": -73.7799381
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      },
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.7357576,
+            "longitude": -73.9935817
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "TRANSIT"},
+      "origin": {"visit_id": "SOURCE_ID"},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "48788EFAAAB082CA",
+    "place_visit": [
+      {
+        "id": "SOURCE_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.67932634234707,
+            "longitude": -73.80400602608925
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      },
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.735663699999996,
+            "longitude": -73.9935472
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "TRANSIT"},
+      "origin": {"visit_id": "SOURCE_ID"},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "489E5C8540267DFF",
+    "place_visit": [
+      {"id": ""},
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 37.5615218,
+            "longitude": -122.274656
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "DRIVE"},
+      "origin": {"visit_id": ""},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "48AE3D90033D5C3F",
+    "place_visit": [
+      {"id": ""},
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 37.727900999999996,
+            "longitude": -122.453049
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "DRIVE"},
+      "origin": {"visit_id": ""},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "48D702B889321BDB",
+    "place_visit": [
+      {"id": ""},
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 37.4536517,
+            "longitude": -122.17761639999999
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "DRIVE"},
+      "origin": {"visit_id": ""},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "49F45369A1B62AAE",
+    "place_visit": [
+      {
+        "id": "SOURCE_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.735249434241915,
+            "longitude": -73.9934502102906
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      },
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.6468596,
+            "longitude": -73.7799381
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {
+        "travel_mode": "TRANSIT",
+        "transit": {"route": {"leg": [
+          {
+            "mode": "WALKING",
+            "destination": "14 St\u2013Union Sq"
+          },
+          {
+            "mode": "TRANSIT",
+            "destination": "33 St PATH / 34 St - Herald Sq Station"
+          },
+          {
+            "mode": "TRANSIT",
+            "destination": "Jamaica Station"
+          },
+          {
+            "mode": "TRANSIT",
+            "destination": "JFK Terminal 5"
+          },
+          {"mode": "WALKING"}
+        ]}}
+      },
+      "origin": {"visit_id": "SOURCE_ID"},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "4A1F72CAB8D9B8C4",
+    "place_visit": [
+      {"id": ""},
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 37.503646499999995,
+            "longitude": -122.494689
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "DRIVE"},
+      "origin": {"visit_id": ""},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "4A685D02A4CB3505",
+    "place_visit": [
+      {
+        "id": "SOURCE_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.71727009670541,
+            "longitude": -73.99946607382722
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      },
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.7357576,
+            "longitude": -73.9935817
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {
+        "travel_mode": "TRANSIT",
+        "transit": {"route": {"leg": [
+          {
+            "mode": "WALKING",
+            "destination": "Canal St"
+          },
+          {
+            "mode": "TRANSIT",
+            "destination": "14 St\u2013Union Sq"
+          },
+          {"mode": "WALKING"}
+        ]}}
+      },
+      "origin": {"visit_id": "SOURCE_ID"},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "4BC8E03D30CA1A62",
+    "place_visit": [
+      {
+        "id": "SOURCE_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.73534715267714,
+            "longitude": -73.99354228596168
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      },
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.7675325,
+            "longitude": -73.9391115
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "TRANSIT"},
+      "origin": {"visit_id": "SOURCE_ID"},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "52509CF8C937584F",
+    "place_visit": [
+      {"id": ""},
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 37.3332482,
+            "longitude": -122.1089714
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "DRIVE"},
+      "origin": {"visit_id": ""},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "526993DBA0E7DB4C",
+    "place_visit": [
+      {"id": ""},
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 36.896844099999996,
+            "longitude": -111.40849039999999
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {"travel_mode": "DRIVE"},
+      "origin": {"visit_id": ""},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  },
+  {
+    "id": "566A796B13A4BF7B",
+    "place_visit": [
+      {
+        "id": "SOURCE_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.75445884481564,
+            "longitude": -73.98742407046083
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      },
+      {
+        "id": "DESTINATION_ID",
+        "place": {
+          "lat_lng": {
+            "latitude": 40.820352,
+            "longitude": -73.978735
+          },
+          "semantic_type": "TYPE_UNKNOWN"
+        }
+      }
+    ],
+    "transition": [{
+      "route": {
+        "travel_mode": "TRANSIT",
+        "transit": {"route": {"leg": [
+          {
+            "mode": "WALKING",
+            "destination": "Port Authority Bus Terminal"
+          },
+          {
+            "mode": "TRANSIT",
+            "destination": "River Rd at Russell Ave"
+          },
+          {"mode": "WALKING"}
+        ]}}
+      },
+      "origin": {"visit_id": "SOURCE_ID"},
+      "destination": {"visit_id": "DESTINATION_ID"}
+    }]
+  }
+]}
