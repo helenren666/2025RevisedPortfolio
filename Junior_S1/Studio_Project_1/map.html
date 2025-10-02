@@ -2,8 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>我的地点地图</title>
-  <!-- Leaflet 样式 -->
+  <title>My_Map</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     #map {
@@ -18,54 +17,59 @@
 <body>
   <div id="map"></div>
 
-  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    // 坐标数组
+    // 坐标
     const locations = [
-      [37.5211456, -122.3140069], // 1 → Home2
-      [37.5341627, -122.3350642], // 2 → Gym
-      [37.6153981, -122.3898792], // 3 → SFO
-      [40.6468596, -73.7799381],  // 4 → JFK
-      [40.7357576, -73.9935817],  // 5 → Dorm
-      [40.7353472, -73.9935423],  // 6 → The New School
-      [36.8968441, -111.4084904], // 7 → Phonix
-      [40.8203520, -73.9787350],  // 8 → Employer’s Home
-      [37.3332482, -122.1089714]  // 9 → Home home
+      [37.5211456, -122.3140069], // 1
+      [37.5341627, -122.3350642], // 2
+      [37.6153981, -122.3898792], // 3
+      [40.6468596, -73.7799381],  // 4
+      [40.7357576, -73.9935817],  // 5
+      [40.7353472, -73.9935423],  // 6
+      [36.8968441, -111.4084904], // 7
+      [40.8203520, -73.9787350],  // 8
+      [37.3332482, -122.1089714]  // 9
     ];
 
-    // 名称数组
+    // 名称
     const names = [
-      "Home2",
-      "Gym",
-      "San Francisco Airport",
-      "New York Airport",
-      "Freshmen Year Dorm",
-      "The New School",
-      "Phonix",
-      "Employer’s Home",
-      "Home home"
+      "Home2","Gym","San Francisco Airport","New York Airport",
+      "Freshmen Year Dorm","The New School","Phonix","Employer’s Home","Home home"
     ];
 
-    // ✅ 节点颜色逻辑 (和 network.html 保持一致)
-    function getNodeColor(index) {
-      if ([1, 9].includes(index + 1)) return [55, 68, 163];   // 蓝色
-      if ([2, 6, 7, 8].includes(index + 1)) return [244, 115, 250]; // 粉色
-      if ([3, 4, 5].includes(index + 1)) return [167, 88, 245]; // 紫色
-      return [200, 200, 200]; // fallback
-    }
+    // 节点颜色逻辑（和 network 一致）
+    const nodeColorMap = {
+      1: [55, 68, 163],   // 蓝
+      2: [244, 115, 250], // 粉
+      3: [167, 88, 245],  // 紫
+      4: [167, 88, 245],  // 紫
+      5: [167, 88, 245],  // 紫
+      6: [244, 115, 250], // 粉
+      7: [244, 115, 250], // 粉
+      8: [244, 115, 250], // 粉
+      9: [55, 68, 163]    // 蓝
+    };
 
-    // ✅ edges 逻辑 (和 network.html 保持一致)
+    // 边
     const edges = [
-      { from: 1, to: 2, color: [167, 88, 245] },   // 紫
-      { from: 1, to: 3, color: [55, 68, 163] },    // 蓝
-      { from: 1, to: 9, color: [244, 115, 250] },  // 粉
-      { from: 4, to: 3, color: [167, 88, 245] },   // 紫
-      { from: 4, to: 5, color: [55, 68, 163] },    // 蓝
-      { from: 5, to: 6, color: [167, 88, 245] },   // 紫
-      { from: 3, to: 7, color: [244, 115, 250] },  // 粉
-      { from: 3, to: 9, color: [167, 88, 245] }    // 紫
+      { from: 1, to: 2, color: [167, 88, 245] },
+      { from: 1, to: 3, color: [55, 68, 163] },
+      { from: 1, to: 9, color: [244, 115, 250] },
+      { from: 4, to: 3, color: [167, 88, 245] },
+      { from: 4, to: 5, color: [55, 68, 163] },
+      { from: 5, to: 6, color: [167, 88, 245] },
+      { from: 3, to: 7, color: [244, 115, 250] },
+      { from: 3, to: 9, color: [167, 88, 245] }
     ];
+
+    // ✅ RGB 转 HEX
+    function rgbToHex(rgb) {
+      return "#" + rgb.map(x => {
+        const hex = x.toString(16);
+        return hex.length === 1 ? "0" + hex : hex;
+      }).join("");
+    }
 
     // 初始化地图
     const map = L.map('map').setView(locations[0], 5);
@@ -81,15 +85,16 @@
     const lat = parseFloat(urlParams.get("lat"));
     const lng = parseFloat(urlParams.get("lng"));
 
-    // 点击的点 index
     const clickedIndex = locations.findIndex(
       ([la, ln]) => Math.abs(la - lat) < 1e-6 && Math.abs(ln - lng) < 1e-6
     );
 
-    // 遍历所有点
+    // 遍历点
     locations.forEach(([lat, lng], index) => {
-      let baseColor = getNodeColor(index);
-      let color = (index === clickedIndex) ? "yellow" : `rgb(${baseColor[0]},${baseColor[1]},${baseColor[2]})`;
+      const baseColor = nodeColorMap[index+1];
+      const hexColor = rgbToHex(baseColor);
+
+      let color = (index === clickedIndex) ? "yellow" : hexColor;
       let radius = (index === clickedIndex) ? 30 : 12;
 
       L.circleMarker([lat, lng], {
@@ -97,11 +102,10 @@
         radius: radius,
         fillColor: color,
         fillOpacity: 0.9
-      }).addTo(map)
-        .bindPopup(names[index]);
+      }).addTo(map).bindPopup(names[index]);
     });
 
-    // 如果有点击点 → 画连接线
+    // 点击点 → 连线
     if (clickedIndex !== -1) {
       map.setView(locations[clickedIndex], 13);
 
@@ -110,13 +114,11 @@
           const otherId = edge.from === clickedIndex+1 ? edge.to : edge.from;
           const otherLoc = locations[otherId-1];
 
+          const edgeColor = rgbToHex(edge.color);
+
           L.polyline(
-            [ locations[clickedIndex], otherLoc ],
-            {
-              color: `rgb(${edge.color[0]},${edge.color[1]},${edge.color[2]})`,
-              weight: 4,
-              opacity: 0.8
-            }
+            [locations[clickedIndex], otherLoc],
+            { color: edgeColor, weight: 4, opacity: 0.8 }
           ).addTo(map);
         }
       });
@@ -124,6 +126,7 @@
   </script>
 </body>
 </html>
+
 
 
 

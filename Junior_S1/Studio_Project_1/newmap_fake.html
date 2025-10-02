@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>我的地点地图</title>
+  <!-- Leaflet 样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+    .leaflet-interactive {
+      filter: blur(5px) saturate(10) brightness(1.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // 9 个坐标
+    const locations = [
+      [37.5211456, -122.3140069], // 1 → Home2
+      [37.5341627, -122.3350642], // 2 → Gym
+      [37.6153981, -122.3898792], // 3 → SFO
+      [40.6468596, -73.7799381],  // 4 → JFK
+      [40.7357576, -73.9935817],  // 5 → Dorm
+      [40.7353472, -73.9935423],  // 6 → The New School
+      [36.8968441, -111.4084904], // 7 → Phonix
+      [40.8203520, -73.9787350],  // 8 → Employer’s Home
+      [37.3332482, -122.1089714]  // 9 → Home home
+    ];
+
+    // 对应的名称
+    const names = [
+      "Home2",
+      "Gym",
+      "San Francisco Airport",
+      "New York Airport",
+      "Freshmen Year Dorm",
+      "The New School",
+      "Phonix",
+      "Employer’s Home",
+      "Home home"
+    ];
+
+    // ✅ 节点颜色逻辑（和 network.html 保持一致）
+    const nodeColorMap = {
+      1: [55, 68, 163],   // 蓝色
+      2: [244, 115, 250], // 粉色
+      3: [167, 88, 245],  // 紫色
+      4: [167, 88, 245],  // 紫色
+      5: [167, 88, 245],  // 紫色
+      6: [244, 115, 250], // 粉色
+      7: [244, 115, 250], // 粉色
+      8: [244, 115, 250], // 粉色
+      9: [55, 68, 163]    // 蓝色
+    };
+
+    // ✅ edges（和 network.html 保持一致）
+    const edges = [
+      { from: 1, to: 2, color: [167, 88, 245] },   // 紫
+      { from: 1, to: 3, color: [55, 68, 163] },    // 蓝
+      { from: 1, to: 9, color: [244, 115, 250] },  // 粉
+      { from: 4, to: 3, color: [167, 88, 245] },   // 紫
+      { from: 4, to: 5, color: [55, 68, 163] },    // 蓝
+      { from: 5, to: 6, color: [167, 88, 245] },   // 紫
+      { from: 3, to: 7, color: [244, 115, 250] },  // 粉
+      { from: 3, to: 9, color: [167, 88, 245] }    // 紫
+    ];
+
+    // 初始化地图
+    const map = L.map('map').setView(locations[0], 5);
+
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
+      attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://stamen.com/">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      minZoom: 3,
+      maxZoom: 17
+    }).addTo(map);
+
+    // URL 参数
+    const urlParams = new URLSearchParams(window.location.search);
+    const lat = parseFloat(urlParams.get("lat"));
+    const lng = parseFloat(urlParams.get("lng"));
+
+    // 点击的点 index
+    const clickedIndex = locations.findIndex(
+      ([la, ln]) => Math.abs(la - lat) < 1e-6 && Math.abs(ln - lng) < 1e-6
+    );
+
+    // 遍历所有点：未点击 → 按原色，点击 → 黄色
+    locations.forEach(([lat, lng], index) => {
+      let baseColor = nodeColorMap[index+1];
+      let color = (index === clickedIndex) ? "yellow" : `rgb(${baseColor[0]},${baseColor[1]},${baseColor[2]})`;
+      let radius = (index === clickedIndex) ? 30 : 12;
+
+      L.circleMarker([lat, lng], {
+        color: color,
+        radius: radius,
+        fillColor: color,
+        fillOpacity: 0.9
+      }).addTo(map)
+        .bindPopup(names[index]);
+    });
+
+    // 如果有点击点 → 画连线
+    if (clickedIndex !== -1) {
+      map.setView(locations[clickedIndex], 13);
+
+      edges.forEach(edge => {
+        if (edge.from === clickedIndex+1 || edge.to === clickedIndex+1) {
+          const otherId = edge.from === clickedIndex+1 ? edge.to : edge.from;
+          const otherLoc = locations[otherId-1];
+
+          L.polyline(
+            [ locations[clickedIndex], otherLoc ],
+            {
+              color: `rgb(${edge.color[0]},${edge.color[1]},${edge.color[2]})`,
+              weight: 4,
+              opacity: 0.8
+            }
+          ).addTo(map);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
