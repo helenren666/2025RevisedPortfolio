@@ -1,0 +1,950 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>经纬度节点网络</title>
+  <style>
+    body { margin:0; background:black; color:white; overflow:hidden; }
+    canvas { display:block; }
+    button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 8px 12px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="goToMap()">去地图</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script>
+    // 经纬度数据
+    const locations = [
+
+  [37.5211456, -122.3140069], // 3130
+  [37.5341627, -122.3350642], // CSM
+  [37.6153981, -122.3898792], // SFO
+  [40.6468596, -73.7799381],  // JFK
+  [40.7357576, -73.9935817],  // dorm
+  [40.7353472, -73.9935423],  // TNS
+  [36.8968441, -111.4084904], // phonix
+  [40.8203520, -73.9787350],   //samhome
+   [37.3332482, -122.1089714] //13889
+    ];
+
+    let nodes = [];
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      textSize(12);
+      fill(255);
+      locations.forEach(([lat, lng]) => {
+        nodes.push({
+          x: random(width),
+          y: random(height),
+          dx: random(-1, 1),
+          dy: random(-1, 1),
+          lat, lng
+        });
+      });
+    }
+
+    function draw() {
+      background(0);
+      stroke(255, 100);
+      // draw connections
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          line(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+        }
+      }
+      // draw nodes
+      noStroke();
+      fill(255, 0, 0);
+      nodes.forEach(n => {
+        circle(n.x, n.y, 8);
+        fill(255);
+        text(`${n.lat.toFixed(2)},${n.lng.toFixed(2)}`, n.x + 10, n.y);
+        n.x += n.dx;
+        n.y += n.dy;
+        if (n.x < 0 || n.x > width) n.dx *= -1;
+        if (n.y < 0 || n.y > height) n.dy *= -1;
+      });
+    }
+
+    function mousePressed() {
+      // 点击点，跳到 map.html
+      for (let n of nodes) {
+        if (dist(mouseX, mouseY, n.x, n.y) < 10) {
+          window.location.href = `map.html?lat=${n.lat}&lng=${n.lng}`;
+        }
+      }
+    }
+
+    function goToMap() {
+      // 默认跳到第一个点
+      const n = nodes[0];
+      window.location.href = `map.html?lat=${n.lat}&lng=${n.lng}`;
+    }
+  </script>
+</body>
+</html> -->
+
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>经纬度节点网络</title>
+  <style>
+    body { margin:0; background:black; color:white; overflow:hidden; }
+    canvas { display:block; }
+    button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 8px 12px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="goToMap()">去地图</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script>
+    // 经纬度数据（编号 = index+1）
+    const locations = [
+      [37.5211456, -122.3140069], // 1 → 3130
+      [37.5341627, -122.3350642], // 2 → CSM
+      [37.6153981, -122.3898792], // 3 → SFO
+      [40.6468596, -73.7799381],  // 4 → JFK
+      [40.7357576, -73.9935817],  // 5 → dorm
+      [40.7353472, -73.9935423],  // 6 → The New School
+      [36.8968441, -111.4084904], // 7 → phonix
+      [40.8203520, -73.9787350],  // 8 → sam home
+      [37.3332482, -122.1089714]  // 9 → home 13889
+    ];
+
+    // 定义连线关系 (编号从1开始)
+    const edges = {
+      1: [2, 3, 9],  // 节点1连2,3,9
+      // 2: [1],        // 节点2连1
+      // 3: [1, 4],     // 节点3连1,4
+      // 5: [6],        // 节点5连6
+      // 6: [5],        // 节点6连5
+      // 7: [8],        // 节点7连8
+      // 8: [7],        // 节点8连7
+      // 9: [1]         // 节点9连1
+    };
+
+    let nodes = [];
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      textSize(12);
+      fill(255);
+      locations.forEach(([lat, lng]) => {
+        nodes.push({
+          x: random(width),
+          y: random(height),
+          dx: random(-1, 1),
+          dy: random(-1, 1),
+          lat, lng
+        });
+      });
+    }
+
+    function draw() {
+      background(0);
+
+      // 根据 edges 画有关系的线
+      stroke(255, 100);
+      for (let i = 0; i < nodes.length; i++) {
+        const connections = edges[i + 1]; // 因为编号是1开始
+        if (connections) {
+          connections.forEach(j => {
+            line(nodes[i].x, nodes[i].y, nodes[j - 1].x, nodes[j - 1].y);
+          });
+        }
+      }
+
+      // 画节点
+      noStroke();
+      fill(255, 0, 0);
+      nodes.forEach((n, idx) => {
+        circle(n.x, n.y, 8);
+        fill(255);
+        text(`${n.lat.toFixed(2)}, ${n.lng.toFixed(2)}`, n.x + 10, n.y);
+        n.x += n.dx;
+        n.y += n.dy;
+        if (n.x < 0 || n.x > width) n.dx *= -1;
+        if (n.y < 0 || n.y > height) n.dy *= -1;
+      });
+    }
+
+    function mousePressed() {
+      // 点击点，跳到 map.html
+      for (let i = 0; i < nodes.length; i++) {
+        if (dist(mouseX, mouseY, nodes[i].x, nodes[i].y) < 10) {
+          window.location.href = `map.html?lat=${nodes[i].lat}&lng=${nodes[i].lng}`;
+        }
+      }
+    }
+
+    function goToMap() {
+      // 默认跳到第一个点
+      const n = nodes[0];
+      window.location.href = `map.html?lat=${n.lat}&lng=${n.lng}`;
+    }
+  </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+<!-- 
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Futuristic Network</title>
+  <style>
+    body { margin:0; background:black; overflow:hidden; }
+    canvas { display:block; }
+  </style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+<script>
+let nodes = [];
+let words = ["AI", "DATA", "NODE", "∞", "01", "LINK"];
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  noStroke();
+
+  // 创建一堆节点
+  for (let i = 0; i < 80; i++) {
+    nodes.push({
+      x: random(width),
+      y: random(height),
+      dx: random(-1.5, 1.5),
+      dy: random(-1.5, 1.5),
+      r: random([6, 10, 14, 20]), // 大小类别
+      color: color(random(100,255), random(100,255), random(255)),
+      word: random(words),
+      phase: random(TWO_PI) // 用于闪烁/脉动
+    });
+  }
+}
+
+function draw() {
+  background(10, 20, 30, 200); // 深色背景
+
+  // 画连线
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i+1; j < nodes.length; j++) {
+      let d = dist(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+      if (d < 150) {
+        stroke(100, 200, 255, map(d, 0, 150, 200, 0)); // 蓝色渐隐
+        line(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+      }
+    }
+  }
+
+  noStroke();
+  // 画节点
+  nodes.forEach(n => {
+    // 脉动大小
+    let pulse = sin(frameCount*0.05 + n.phase) * 2;
+
+    // 光晕
+    fill(red(n.color), green(n.color), blue(n.color), 80);
+    ellipse(n.x, n.y, n.r*3 + pulse);
+
+    // 实心点
+    fill(n.color);
+    ellipse(n.x, n.y, n.r + pulse);
+
+    // 文字
+    fill(200, 255, 255, 200);
+    textSize(12);
+    text(n.word, n.x + n.r+5, n.y);
+
+    // 移动
+    n.x += n.dx;
+    n.y += n.dy;
+    if (n.x < 0 || n.x > width) n.dx *= -1;
+    if (n.y < 0 || n.y > height) n.dy *= -1;
+  });
+}
+</script>
+</body>
+</html>  -->
+
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Watercolor Network</title>
+  <style>
+    body { margin:0; overflow:hidden; }
+    canvas { display:block; }
+  </style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+<script>
+let nodes = [];
+let bg;
+
+function preload() {
+  bg = loadImage("watercolor.jpg"); // 你的水彩背景图
+}
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+
+  // 生成很多节点
+  for (let i = 0; i < 50; i++) {
+    nodes.push({
+      x: random(width),
+      y: random(height),
+      dx: random(-1, 1),
+      dy: random(-1, 1),
+      r: random([8, 12, 16]),
+      color: [random(100,255), random(100,255), random(200,255)]
+    });
+  }
+}
+
+function draw() {
+  background(255);
+  image(bg, 0, 0, width, height); // 背景图
+
+  // 连线（近距离才连）
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i+1; j < nodes.length; j++) {
+      let d = dist(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+      if (d < 120) {
+        stroke(50, 80, 120, map(d, 0, 120, 180, 0));
+        line(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+      }
+    }
+  }
+
+  noStroke();
+  nodes.forEach(n => {
+    // 🌈 用径向渐变画“水彩晕染”效果
+    let g = drawingContext.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r*3);
+    g.addColorStop(0, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, 1)`);
+    g.addColorStop(1, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, 0)`);
+    drawingContext.fillStyle = g;
+    ellipse(n.x, n.y, n.r*6);
+
+    // 中心实心点
+    fill(n.color[0], n.color[1], n.color[2]);
+    ellipse(n.x, n.y, n.r);
+
+    // 移动
+    n.x += n.dx;
+    n.y += n.dy;
+    if (n.x < 0 || n.x > width) n.dx *= -1;
+    if (n.y < 0 || n.y > height) n.dy *= -1;
+  });
+}
+</script>
+</body>
+</html> -->
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Watercolor Network</title>
+  <style>
+    body { margin:0; overflow:hidden; }
+    canvas { display:block; }
+  </style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+<script>
+let nodes = [];
+let bg;
+
+// 9 个真实经纬度
+const locations = [
+  [37.5211456, -122.3140069], // 1 → 3130
+  [37.5341627, -122.3350642], // 2 → CSM
+  [37.6153981, -122.3898792], // 3 → SFO
+  [40.6468596, -73.7799381],  // 4 → JFK
+  [40.7357576, -73.9935817],  // 5 → dorm
+  [40.7353472, -73.9935423],  // 6 → The New School
+  [36.8968441, -111.4084904], // 7 → phonix
+  [40.8203520, -73.9787350],  // 8 → sam home
+  [37.3332482, -122.1089714]  // 9 → home 13889
+];
+
+function preload() {
+  bg = loadImage("watercolor.jpg"); // 背景图
+}
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+
+  // 每个点重复 4 次 → 总共 36 个
+  for (let rep = 0; rep < 4; rep++) {
+    for (let i = 0; i < locations.length; i++) {
+      let lat = locations[i][0];
+      let lng = locations[i][1];
+
+      // ✅ 在这里加入颜色逻辑
+      let c;
+      if ([1, 9].includes(i+1)) {
+        c = [55, 68, 163]; // 蓝色
+      } else if ([2, 6, 7, 8].includes(i+1)) {
+        c = [244, 115, 250]; // 红色
+      } else if ([3, 4, 5].includes(i+1)) {
+        c = [167, 88, 245]; // 黄色
+      }
+
+      // 节点属性
+      nodes.push({
+        x: random(width),
+        y: random(height),
+        dx: random(-1, 1),
+        dy: random(-1, 1),
+        r: random([6, 14, 28]),   // 圆点大小夸张一些
+        color: c,                 // 🎨 使用分类颜色
+        lat: lat,
+        lng: lng
+      });
+    }
+  }
+}
+
+
+function draw() {
+  background(255);
+  image(bg, 0, 0, width, height);
+
+  // 连线（近距离才连）
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i+1; j < nodes.length; j++) {
+      let d = dist(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+      if (d < 120) {
+        stroke(50, 80, 120, map(d, 0, 120, 180, 0));
+        line(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+      }
+    }
+  }
+
+  noStroke();
+  nodes.forEach(n => {
+    // 水彩晕染：径向渐变
+    let g = drawingContext.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r*3);
+    g.addColorStop(0, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, 1)`);
+    g.addColorStop(1, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, 0)`);
+    drawingContext.fillStyle = g;
+    ellipse(n.x, n.y, n.r*6);
+
+    // 中心点
+    fill(n.color[0], n.color[1], n.color[2]);
+    ellipse(n.x, n.y, n.r);
+
+    // 经纬度文字
+    fill(255, 200); // 白色，半透明
+    textSize(n.r * 1.);  // 字号跟圆点半径成比例
+    textAlign(CENTER, TOP);
+    // text(`${n.lat.toFixed(2)}, ${n.lng.toFixed(2)}`, n.x+10, n.y);
+    text(`${n.lat.toFixed(2)}, ${n.lng.toFixed(2)}`, n.x, n.y + n.r + 0.1);
+    textStyle('italic');
+
+    // 移动
+    n.x += n.dx;
+    n.y += n.dy;
+    if (n.x < 0 || n.x > width) n.dx *= -1;
+    if (n.y < 0 || n.y > height) n.dy *= -1;
+  });
+}
+
+// 点击 → 跳到 map.html
+function mousePressed() {
+  for (let i = 0; i < nodes.length; i++) {
+    if (dist(mouseX, mouseY, nodes[i].x, nodes[i].y) < nodes[i].r/2) {
+      window.location.href = `map.html?lat=${nodes[i].lat}&lng=${nodes[i].lng}`;
+    }
+  }
+}
+</script>
+</body>
+</html> -->
+
+
+
+<!-- 
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Watercolor Network with Groups</title>
+  <style>
+    body { margin:0; overflow:hidden; }
+    canvas { display:block; }
+  </style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+<script>
+let nodes = [];
+let bg;
+
+// 9 个真实经纬度
+const locations = [
+  [37.5211456, -122.3140069], // 1 → 3130
+  [37.5341627, -122.3350642], // 2 → CSM
+  [37.6153981, -122.3898792], // 3 → SFO
+  [40.6468596, -73.7799381],  // 4 → JFK
+  [40.7357576, -73.9935817],  // 5 → dorm
+  [40.7353472, -73.9935423],  // 6 → The New School
+  [36.8968441, -111.4084904], // 7 → phonix
+  [40.8203520, -73.9787350],  // 8 → sam home
+  [37.3332482, -122.1089714]  // 9 → home 13889
+];
+
+// ✅ 定义边（逻辑连接）
+const edges = [
+  { from: 1, to: 2, color: [167, 88, 245] },   // 紫色
+  { from: 1, to: 3, color: [55, 68, 163] },    // 蓝色
+  { from: 1, to: 9, color: [244, 115, 250] },  // 粉色
+  { from: 4, to: 3, color: [167, 88, 245] },   // 紫色
+  { from: 4, to: 5, color: [55, 68, 163] },    // 蓝色
+  { from: 5, to: 6, color: [167, 88, 245] },   // 紫色
+  { from: 3, to: 7, color: [244, 115, 250] },  // 粉色
+  { from: 3, to: 9, color: [167, 88, 245] }    // 紫色
+];
+
+function preload() {
+  bg = loadImage("watercolor.jpg"); // 背景图
+}
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+
+  // 每个点重复 4 次 → 总共 36 个
+  for (let rep = 0; rep < 4; rep++) {
+    for (let i = 0; i < locations.length; i++) {
+      let lat = locations[i][0];
+      let lng = locations[i][1];
+
+      // 颜色逻辑
+      let c;
+      if ([1, 9].includes(i+1)) {
+        c = [55, 68, 163]; // 蓝色
+      } else if ([2, 6, 7, 8].includes(i+1)) {
+        c = [244, 115, 250]; // 粉色
+      } else if ([3, 4, 5].includes(i+1)) {
+        c = [167, 88, 245]; // 紫色
+      }
+
+      // 节点属性
+      nodes.push({
+        id: i+1,   // 节点编号 (1-9)
+        rep: rep,  // 第几份 (0-3)
+        x: random(width),
+        y: random(height),
+        dx: random(-1, 1),
+        dy: random(-1, 1),
+        r: random([6, 14, 28]),   // 尺寸差异
+        color: c,
+        lat: lat,
+        lng: lng
+      });
+    }
+  }
+}
+
+function draw() {
+  background(255);
+  image(bg, 0, 0, width, height);
+
+  // ✅ 分组内部连线
+  for (let rep = 0; rep < 4; rep++) {
+    edges.forEach(edge => {
+      let fromNode = nodes.find(n => n.id === edge.from && n.rep === rep);
+      let toNode = nodes.find(n => n.id === edge.to && n.rep === rep);
+
+      if (fromNode && toNode) {
+        stroke(edge.color[0], edge.color[1], edge.color[2], 180);
+        line(fromNode.x, fromNode.y, toNode.x, toNode.y);
+      }
+    });
+  }
+
+  noStroke();
+  nodes.forEach(n => {
+    // 水彩晕染
+    let g = drawingContext.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r*3);
+    g.addColorStop(0, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, 1)`);
+    g.addColorStop(1, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, 0)`);
+    drawingContext.fillStyle = g;
+    ellipse(n.x, n.y, n.r*6);
+
+    // 中心点
+    fill(n.color[0], n.color[1], n.color[2]);
+    ellipse(n.x, n.y, n.r);
+
+    // 经纬度文字
+    fill(255, 220);
+    textSize(n.r * 0.6);
+    textAlign(CENTER, TOP);
+    text(`${n.lat.toFixed(2)}, ${n.lng.toFixed(2)}`, n.x, n.y + n.r + 4);
+
+    // 移动
+    n.x += n.dx;
+    n.y += n.dy;
+    if (n.x < 0 || n.x > width) n.dx *= -1;
+    if (n.y < 0 || n.y > height) n.dy *= -1;
+  });
+}
+
+// 点击 → 跳到 map.html
+function mousePressed() {
+  for (let i = 0; i < nodes.length; i++) {
+    if (dist(mouseX, mouseY, nodes[i].x, nodes[i].y) < nodes[i].r) {
+      window.location.href = `map.html?lat=${nodes[i].lat}&lng=${nodes[i].lng}`;
+    }
+  }
+}
+</script>
+</body>
+</html> -->
+
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Watercolor Network with Fixed Sizes</title>
+  <style>
+    body { margin:0; overflow:hidden; }
+    canvas { display:block; }
+  </style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+<script>
+let nodes = [];
+let bg;
+
+// 9 个真实经纬度
+const locations = [
+  [37.5211456, -122.3140069], // 1 → 3130
+  [37.5341627, -122.3350642], // 2 → CSM
+  [37.6153981, -122.3898792], // 3 → SFO
+  [40.6468596, -73.7799381],  // 4 → JFK
+  [40.7357576, -73.9935817],  // 5 → dorm
+  [40.7353472, -73.9935423],  // 6 → The New School
+  [36.8968441, -111.4084904], // 7 → phonix
+  [40.8203520, -73.9787350],  // 8 → sam home
+  [37.3332482, -122.1089714]  // 9 → home 13889
+];
+
+// ✅ 定义边（逻辑连接）
+const edges = [
+  { from: 1, to: 2, color: [167, 88, 245] },   // 紫色
+  { from: 1, to: 3, color: [55, 68, 163] },    // 蓝色
+  { from: 1, to: 9, color: [244, 115, 250] },  // 粉色
+  { from: 4, to: 3, color: [167, 88, 245] },   // 紫色
+  { from: 4, to: 5, color: [55, 68, 163] },    // 蓝色
+  { from: 5, to: 6, color: [167, 88, 245] },   // 紫色
+  { from: 3, to: 7, color: [244, 115, 250] },  // 粉色
+  { from: 3, to: 9, color: [167, 88, 245] }    // 紫色
+];
+
+function preload() {
+  bg = loadImage("watercolor.jpg"); // 背景图
+}
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+
+  // 每个点重复 4 次 → 总共 36 个
+  for (let rep = 0; rep < 4; rep++) {
+    for (let i = 0; i < locations.length; i++) {
+      let lat = locations[i][0];
+      let lng = locations[i][1];
+
+      // 🎨 颜色逻辑
+      let c;
+      if ([1, 9].includes(i+1)) {
+        c = [55, 68, 163]; // 蓝色
+      } else if ([2, 6, 7, 8].includes(i+1)) {
+        c = [244, 115, 250]; // 粉色
+      } else if ([3, 4, 5].includes(i+1)) {
+        c = [167, 88, 245]; // 紫色
+      }
+
+      // 🔑 大小逻辑
+      let r;
+      if ([1, 6, 9].includes(i+1)) {
+        r = 28; // 大点 = 呆很久
+      } else if ([2, 5].includes(i+1)) {
+        r = 16; // 中等 = 呆中等时间
+      } else {
+        r = 8;  // 小 = 呆很短
+      }
+
+      // 节点属性
+      nodes.push({
+        id: i+1,   // 节点编号 (1-9)
+        rep: rep,  // 第几份 (0-3)
+        x: random(width),
+        y: random(height),
+        dx: random(-1, 1),
+        dy: random(-1, 1),
+        r: r,
+        color: c,
+        lat: lat,
+        lng: lng,
+        speedFactor: 1
+      });
+    }
+  }
+}
+
+function draw() {
+  background(255);
+  image(bg, 0, 0, width, height);
+
+  // ✅ 分组内部连线
+  for (let rep = 0; rep < 4; rep++) {
+    edges.forEach(edge => {
+      let fromNode = nodes.find(n => n.id === edge.from && n.rep === rep);
+      let toNode = nodes.find(n => n.id === edge.to && n.rep === rep);
+
+      if (fromNode && toNode) {
+        stroke(edge.color[0], edge.color[1], edge.color[2], 180);
+        line(fromNode.x, fromNode.y, toNode.x, toNode.y);
+
+        // 🎯 动态速度逻辑
+        let c1 = fromNode.color;
+        let c2 = toNode.color;
+        if (c1[0]===c2[0] && c1[1]===c2[1] && c1[2]===c2[2]) {
+          if (c1[0]===55 && c1[1]===68 && c1[2]===163) { // 蓝色
+            fromNode.speedFactor = 0.2;
+            toNode.speedFactor = 0.2;
+          } else {
+            fromNode.speedFactor = 3; // 粉色/紫色一致 → 快
+            toNode.speedFactor = 3;
+          }
+        } else {
+          fromNode.speedFactor = 1;
+          toNode.speedFactor = 1;
+        }
+      }
+    });
+  }
+
+  noStroke();
+  nodes.forEach(n => {
+    // 水彩晕染
+    let g = drawingContext.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r*3);
+    g.addColorStop(0, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, 1)`);
+    g.addColorStop(1, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, 0)`);
+    drawingContext.fillStyle = g;
+    ellipse(n.x, n.y, n.r*6);
+
+    // 中心点
+    fill(n.color[0], n.color[1], n.color[2]);
+    ellipse(n.x, n.y, n.r);
+
+    // 经纬度文字
+    fill(255, 220);
+    textSize(n.r * 0.6);  // 字体随点大小
+    textAlign(CENTER, TOP);
+    text(`${n.lat.toFixed(2)}, ${n.lng.toFixed(2)}`, n.x, n.y + n.r + 4);
+    textfont('italic');
+
+    // 移动
+    n.x += n.dx * n.speedFactor;
+    n.y += n.dy * n.speedFactor;
+    if (n.x < 0 || n.x > width) n.dx *= -1;
+    if (n.y < 0 || n.y > height) n.dy *= -1;
+  });
+}
+
+// 点击 → 跳到 map.html
+function mousePressed() {
+  for (let i = 0; i < nodes.length; i++) {
+    if (dist(mouseX, mouseY, nodes[i].x, nodes[i].y) < nodes[i].r) {
+      window.location.href = `map.html?lat=${nodes[i].lat}&lng=${nodes[i].lng}`;
+    }
+  }
+}
+</script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Watercolor Network with Groups</title>
+  <style>
+    body { margin:0; overflow:hidden; }
+    canvas { display:block; }
+  </style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+<script>
+let nodes = [];
+let bg;
+
+// 9 个真实经纬度
+const locations = [
+  [37.5211456, -122.3140069], // 1 → 3130
+  [37.5341627, -122.3350642], // 2 → CSM
+  [37.6153981, -122.3898792], // 3 → SFO
+  [40.6468596, -73.7799381],  // 4 → JFK
+  [40.7357576, -73.9935817],  // 5 → dorm
+  [40.7353472, -73.9935423],  // 6 → The New School
+  [36.8968441, -111.4084904], // 7 → phonix
+  [40.8203520, -73.9787350],  // 8 → sam home
+  [37.3332482, -122.1089714]  // 9 → home 13889
+];
+
+// ✅ 定义边（逻辑连接）
+const edges = [
+  { from: 1, to: 2, color: [167, 88, 245] },   // 紫色
+  { from: 1, to: 3, color: [55, 68, 163] },    // 蓝色
+  { from: 1, to: 9, color: [244, 115, 250] },  // 粉色
+  { from: 4, to: 3, color: [167, 88, 245] },   // 紫色
+  { from: 4, to: 5, color: [55, 68, 163] },    // 蓝色
+  { from: 5, to: 6, color: [167, 88, 245] },   // 紫色
+  { from: 3, to: 7, color: [244, 115, 250] },  // 粉色
+  { from: 3, to: 9, color: [167, 88, 245] }    // 紫色
+];
+
+function preload() {
+  bg = loadImage("watercolor.jpg"); // 背景图
+}
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+
+  // 每个点重复 4 次 → 总共 36 个
+  for (let rep = 0; rep < 4; rep++) {
+    for (let i = 0; i < locations.length; i++) {
+      let lat = locations[i][0];
+      let lng = locations[i][1];
+
+      // 颜色逻辑
+      let c;
+      if ([1, 9].includes(i+1)) {
+        c = [55, 68, 163]; // 蓝色
+      } else if ([2, 6, 7, 8].includes(i+1)) {
+        c = [244, 115, 250]; // 粉色
+      } else if ([3, 4, 5].includes(i+1)) {
+        c = [167, 88, 245]; // 紫色
+      }
+
+      // 节点属性
+      nodes.push({
+        id: i+1,   // 节点编号 (1-9)
+        rep: rep,  // 第几份 (0-3)
+        x: random(width),
+        y: random(height),
+        dx: random(-1, 1),
+        dy: random(-1, 1),
+        r: random([6, 14, 28]),   // 尺寸差异
+        color: c,
+        lat: lat,
+        lng: lng
+      });
+    }
+  }
+}
+
+function draw() {
+  background(255);
+  image(bg, 0, 0, width, height);
+
+  // ✅ 分组内部连线
+  for (let rep = 0; rep < 4; rep++) {
+    edges.forEach(edge => {
+      let fromNode = nodes.find(n => n.id === edge.from && n.rep === rep);
+      let toNode = nodes.find(n => n.id === edge.to && n.rep === rep);
+
+      if (fromNode && toNode) {
+        stroke(edge.color[0], edge.color[1], edge.color[2], 180);
+        line(fromNode.x, fromNode.y, toNode.x, toNode.y);
+      }
+    });
+  }
+
+  noStroke();
+  nodes.forEach(n => {
+    // 水彩晕染
+    let g = drawingContext.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r*3);
+    g.addColorStop(0, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, 1)`);
+    g.addColorStop(1, `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, 0)`);
+    drawingContext.fillStyle = g;
+    ellipse(n.x, n.y, n.r*6);
+
+    // 中心点
+    fill(n.color[0], n.color[1], n.color[2]);
+    ellipse(n.x, n.y, n.r);
+
+    // 经纬度文字
+    fill(255, 220);
+    textSize(n.r * 0.6);
+    textAlign(CENTER, TOP);
+    text(`${n.lat.toFixed(2)}, ${n.lng.toFixed(2)}`, n.x, n.y + n.r + 4);
+    textstyle('italic');
+
+    // 移动
+    n.x += n.dx;
+    n.y += n.dy;
+    if (n.x < 0 || n.x > width) n.dx *= -1;
+    if (n.y < 0 || n.y > height) n.dy *= -1;
+  });
+}
+
+// 点击 → 跳到 map.html
+function mousePressed() {
+  for (let i = 0; i < nodes.length; i++) {
+    if (dist(mouseX, mouseY, nodes[i].x, nodes[i].y) < nodes[i].r) {
+      window.location.href = `map.html?lat=${nodes[i].lat}&lng=${nodes[i].lng}`;
+    }
+  }
+}
+</script>
+</body>
+</html>
