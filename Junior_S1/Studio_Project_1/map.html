@@ -10,6 +10,11 @@
       height: 100vh;  /* 让地图全屏 */
       width: 100%;
     }
+
+/* 单独写，不要放在 #map 里面 */
+.leaflet-interactive {
+  filter: blur(5px) saturate(10) brightness(1.2);
+}
   </style>
 </head>
 <body>
@@ -20,47 +25,51 @@
   <script>
     // 定义你的坐标数组
     const locations = [
-      [37.5211456, -122.3140069],
-      [37.5341627, -122.3350642],
-      [37.6153981, -122.3898792],
-      [40.6468596, -73.7799381],
-      [40.7357576, -73.9935817],
-      [40.6793263, -73.8040060],
-      [40.7356637, -73.9935472],
-      [37.5615218, -122.274656],
-      [37.7279010, -122.453049],
-      [37.4536517, -122.1776164],
-      [40.7352494, -73.9934502],
-      [40.6468596, -73.7799381],
-      [37.5036465, -122.4946890],
-      [40.7172701, -73.9994661],
-      [40.7357576, -73.9935817],
-      [40.7353472, -73.9935423],
-      [40.7675325, -73.9391115],
-      [37.3332482, -122.1089714],
-      [36.8968441, -111.4084904],
-      [40.7544588, -73.9874241],
-      [40.8203520, -73.9787350]
+  [37.5211456, -122.3140069], // 3130
+  [37.5341627, -122.3350642], // CSM
+  [37.6153981, -122.3898792], // SFO
+  [40.6468596, -73.7799381],  // JFK
+  [40.7357576, -73.9935817],  // dorm
+  [40.7353472, -73.9935423],  // The New School
+  [36.8968441, -111.4084904], // phonix
+  [40.8203520, -73.9787350],   // sam home
+   [37.3332482, -122.1089714] //home 13889
     ];
 
     // 初始化地图（这里以第一个点为中心）
     const map = L.map('map').setView(locations[0], 5);
 
-    // 添加底图图层 (OpenStreetMap)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '© OpenStreetMap'
-    }).addTo(map);
+    // // 添加底图图层 (OpenStreetMap)
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //   maxZoom: 19,
+    //   attribution: '© OpenStreetMap'
+    // }).addTo(map);
+
+//     L.tileLayer('https://cartodb-basemaps-a.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{r}.png', {
+//   attribution: '&copy; <a href="https://www.openstreetmap.org/">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+//   subdomains: 'abcd',
+//   maxZoom: 19
+// }).addTo(map);
+
+L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
+  attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://stamen.com/">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  minZoom: 3,
+  maxZoom: 17
+}).addTo(map);
+
+
+
+
 
     // 遍历所有地点，加红色圆点
     locations.forEach(([lat, lng], index) => {
       L.circleMarker([lat, lng], {
         color: 'red',
-        radius: 6,
+        radius: 8,
         fillColor: 'red',
         fillOpacity: 0.8
       }).addTo(map)
-        .bindPopup(`地点 ${index + 1}`);
+        .bindPopup(`Location ${index + 1}`);
     });
     
     // 获取 URL 参数
@@ -74,11 +83,11 @@ if (!isNaN(lat) && !isNaN(lng)) {
 
   // 给这个点画一个高亮的黄色圆圈
   L.circleMarker([lat, lng], {
-    color: 'yellow',
-    radius: 10,
-    fillColor: 'yellow',
+    color: 'pink',
+    radius: 30,
+    fillColor: 'pink',
     fillOpacity: 0.9
-  }).addTo(map).bindPopup("你点击的点").openPopup();
+  }).addTo(map).bindPopup("Location Clicked").openPopup();
 }
 
   </script>
